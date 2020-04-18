@@ -2,12 +2,13 @@ package com.ZAOF.x00355519;
 
 import java.util.ArrayList;
 
-public class Empleado {
+public abstract class Empleado extends Empresa{
     protected String nombre, puesto;
     protected ArrayList<Documento> documentos;
     protected double salario;
 
-    public Empleado(String nombre, String puesto, double salario) {
+    public Empleado(String nombreEmpresa, String nombre, String puesto, double salario) {
+        super(nombreEmpresa);
         this.nombre = nombre;
         this.puesto = puesto;
         this.salario = salario;
@@ -39,6 +40,6 @@ public class Empleado {
 
     }
     public void removeDocumento(String nombre){
-        
+
     }
 }

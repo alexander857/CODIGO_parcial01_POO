@@ -3,16 +3,16 @@ package com.ZAOF.x00355519;
 import java.util.ArrayList;
 
 public class Empresa {
-    private String nombre;
+    private String nombreEmpresa;
     private ArrayList<Empleado> planilla;
 
-    public Empresa(String nombre) {
-        this.nombre = nombre;
+    public Empresa(String nombreEmpresa) {
+        this.nombreEmpresa = nombreEmpresa;
         planilla = new ArrayList<>();
     }
 
-    public String getNombre() {
-        return nombre;
+    public String getNombreEmpresa() {
+        return nombreEmpresa;
     }
 
     public ArrayList<Empleado> getPlanilla() {
