@@ -15,4 +15,8 @@ public class Documento {
     public String getNumero() {
         return numero;
     }
+
+    public String toString(){
+        return "Documento: " + nombreDoc + " Numero: " + numero;
+    }
 }
