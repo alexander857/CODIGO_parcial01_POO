@@ -16,5 +16,25 @@ public class PlazaFija extends Empleado{
         this.extension = extension;
     }
 
+    @Override
+    public void addDocumento(Documento d){
+        documentos.add(d);
+    }
 
+    public String ToString(){
+        String doc = "";
+
+        for(Documento d : documentos){
+            doc += d.toString();
+        }
+
+        if(doc != ""){
+            return "Nombre: " + nombre + " Puesto: " + puesto + " Salario: " + salario +
+                    "Extencion: " + extension + " Documentos: " + doc;
+        }
+        else{
+            return "Nombre: " + nombre + " Puesto: " + puesto + " Salario: " + salario +
+                    "Extencion: " + extension + " Documentos: No hay documentos";
+        }
+    }
 }

@@ -15,4 +15,26 @@ public class ServicioProfesional extends Empleado{
     public void setMesesContrato(int mesesContrato) {
         this.mesesContrato = mesesContrato;
     }
+
+    @Override
+    public void addDocumento(Documento d){
+        documentos.add(d);
+    }
+
+    public String ToString(){
+        String doc = "";
+
+        for(Documento d : documentos){
+            doc += d.toString();
+        }
+
+        if(doc != ""){
+            return "Nombre: " + nombre + " Puesto: " + puesto + " Salario: " + salario +
+                    "Meses de Contrato: " + mesesContrato + " Documentos: " + doc;
+        }
+        else{
+            return "Nombre: " + nombre + " Puesto: " + puesto + " Salario: " + salario +
+                    "Meses de Contrato: " + mesesContrato + " Documentos: No hay documentos";
+        }
+    }
 }

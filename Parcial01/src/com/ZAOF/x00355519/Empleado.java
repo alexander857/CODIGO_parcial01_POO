@@ -36,41 +36,10 @@ public abstract class Empleado extends Empresa{
     }
 
     //metodos de agregar documentos
-    public void addDocumentos(Documento d){
-        documentos.add(d);
-    }
+    public abstract void addDocumento(Documento d);
+
     public void removeDocumento(String nombre){
+
     }
 
-    public String ToString(){
-        String doc = "";
-        PlazaFija P = null;
-        ServicioProfesional S = null;
-
-        //lista de documentos del empleado
-        for(Documento d : documentos){
-            doc += d.toString();
-        }
-
-        if(doc != ""){
-            if(puesto.equalsIgnoreCase("Plaza fija")){
-                return "Nombre: " + nombre + " Puesto: " + puesto + " Salario: $" + salario + "\n" +
-                        "Extencion: "+ P.getExtension() + "Documentos: " + doc;
-            }
-            else{
-                return "Nombre: " + nombre + " Puesto: " + puesto + " Salario: $" + salario + "\n" +
-                        "Mese de contrato: " + S.getMesesContrato() + "Documentos: " + doc;
-            }
-        }
-        else{
-            if(puesto.equalsIgnoreCase("Plaza fija")){
-                return "Nombre: " + nombre + " Puesto: " + puesto + " Salario: $" + salario + "\n" +
-                        "Extencion: "+ P.getExtension() + "Documentos: No tiene documentos";
-            }
-            else{
-                return "Nombre: " + nombre + " Puesto: " + puesto + " Salario: $" + salario + "\n" +
-                        "Mese de contrato: " + S.getMesesContrato() + "Documentos: No tiene documentos";
-            }
-        }
-    }
 }
