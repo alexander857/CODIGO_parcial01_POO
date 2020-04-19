@@ -1,82 +1,66 @@
 package com.ZAOF.x00355519;
 
-public class CalculadoraImpuestos extends Empleado{
-        private Double TotalRenta;
-        private Double TotalIsss;
-        private Double TotalAFP;
+import java.util.Scanner;
 
-        private CalculadoraImpuestos(){
-            //Debe estar vacio
-        }
+public class CalculadoraImpuestos {
+        private double TotalRenta;
+        private double TotalIsss;
+        private double TotalAFP;
 
-        public Double calcularPago(Empleado) {
-            if (Empleado instanceOf Empleado){
-                System.out.println("Ingrese Nombre del empleado a buscar");
-                String nameToFind = nextLine();
-                for (Empleado e : Documento) {
-                    if (nameToFind.equals(Empleado.getName())) {
-                        Double BaseSalary = Empleado.getSalary();
-                        Double SalaryWithoudTaxes = null;
-                        Double LiquidSalary = null;
+    private CalculadoraImpuestos() {
+    }
 
-                        //AFP
-                        Double AFP = (0.0625 * BaseSalary);
-                        TotalAFP += AFP;
+    public static void calcularPago(Empleado empleado) {
+        Scanner sca = new Scanner(System.in);
+        if (empleado instanceof PlazaFija) {
+            double BaseSalary = Empleado.getSalario();
+            double SalaryWithoutTaxes;
 
-                        //ISSS
-                        Double ISSS = (0.03 * BaseSalary);
-                        TotalIsss += ISSS;
+            //AFP
+            double AFP = (0.0625 * BaseSalary);
 
-                        SalaryWithoutTaxes = (BaseSalary - AFP - ISSS);
+            //ISSS
+            double ISSS = (0.03 * BaseSalary);
 
-                        //Renta
-                        if (SalaryWithoutTaxes > 0.01 && SalaryWithoutTaxes <= 472.00) {
-                            Double Renta = 0;
-                            sout("No debe pagar renta\n");
-                            System.out.println("Salario a pagar al empleado: $" + (Renta - SalaryWithoutTaxes) +
-                                    " dolares");
-                        }
+            SalaryWithoutTaxes = (BaseSalary - AFP - ISSS);
 
-                        if (SalaryWithoutTaxes > 472.00 && SalaryWithoutTaxes <= 895.24) {
-                            Double Renta1 = ((0.1 * (SalaryWithoutTaxes - 472)) + 17.67);
-                            System.out.println("Debe pagar: $" + Renta1 + " dolares\n");
-                            System.out.println("Salario a pagar al empleado: $" + (Renta1 - SalaryWithoutTaxes) +
-                                    " dolares");
-                        }
-
-                        if (SalaryWithoutTaxes > 895.24 && SalaryWithoutTaxes <= 2038.10) {
-                            Double Renta2 = ((0.2 * (SalaryWithoutTaxes - 895.25)) + 60);
-                            System.out.println("Debe pagar: $" + Renta2 + " dolares\n");
-                            System.out.println("Salario a pagar al empleado: $" + (Renta2 - SalaryWithoutTaxes) +
-                                    " dolares");
-                        }
-
-                        if (SalaryWithoutTaxes > 2038.10) {
-                            Double Renta3 = ((0.3 * (SalaryWithoutTaxes - 2038.10)) + 288.57);
-                            System.out.println("Debe pagar: $" + Renta3 + " dolares\n");
-                            System.out.println("Salario a pagar al empleado: $" + (Renta3 - SalaryWithoutTaxes) +
-                                    " dolares");
-                        }
-
-                    }
-                }
-            }
-            else if (Empleado instanceOf Servicioprofesional){
-                System.out.println("Ingrese Nombre del empleado a buscar");
-                String nameToFind = next
-                for (Empleado e : Documento) {
-                    if (nameToFind.equals(Empleado)) {
-                        Double BaseSalary = Empleado.getSalary();
-                        System.out.println("Se le descontara el 10% de su salario como valor de renta\n");
-
-                        Double Renta = (0.1 * BaseSalary);
-                        Double LiquidSalary = BaseSalary - Renta;
-
-                        System.out.println("Su salario es: $" + LiquidSalary + " dolares");
-                    }
-                    //Algún comentario del código?
-                }
+            //Renta
+            if (SalaryWithoutTaxes > 0.01 && SalaryWithoutTaxes <= 472.00) {
+                double Renta = 0;
+                System.out.println("No debe pagar renta\n");
+                System.out.println("Salario a pagar al empleado: $" + (SalaryWithoutTaxes - Renta) +
+                        " dolares");
             }
 
+            if (SalaryWithoutTaxes > 472.00 && SalaryWithoutTaxes <= 895.24) {
+                double Renta1 = ((0.1 * (SalaryWithoutTaxes - 472)) + 17.67);
+                System.out.println("Debe pagar: $" + Renta1 + " dolares\n");
+                System.out.println("Salario a pagar al empleado: $" + (SalaryWithoutTaxes - Renta1) +
+                        " dolares");
+            }
+
+            if (SalaryWithoutTaxes > 895.24 && SalaryWithoutTaxes <= 2038.10) {
+                double Renta2 = ((0.2 * (SalaryWithoutTaxes - 895.25)) + 60);
+                System.out.println("Debe pagar: $" + Renta2 + " dolares\n");
+                System.out.println("Salario a pagar al empleado: $" + (SalaryWithoutTaxes - Renta2) +
+                        " dolares");
+            }
+
+            if (SalaryWithoutTaxes > 2038.10) {
+                double Renta3 = ((0.3 * (SalaryWithoutTaxes - 2038.10)) + 288.57);
+                System.out.println("Debe pagar: $" + Renta3 + " dolares\n");
+                System.out.println("Salario a pagar al empleado: $" + (SalaryWithoutTaxes - Renta3) +
+                        " dolares");
+            }
         }
+
+        if (empleado instanceof ServicioProfesional){
+            double BaseSalary = Empleado.getSalario();
+            System.out.println("Se le descontara el 10% de su salario como valor de renta\n");
+                double Renta = (0.1 * BaseSalary);
+                double LiquidSalary = BaseSalary - Renta;
+                System.out.println("Su salario es: $" + LiquidSalary + " dolares");
+        }
+
+    }
 }
