@@ -39,7 +39,6 @@ public abstract class Empleado extends Empresa{
     public abstract void addDocumento(Documento d);
 
     public void removeDocumento(String nombre){
-
     }
 
 }
