@@ -149,9 +149,19 @@ public class Main {
                         break;
                     case '4':
                         //sueldo
+                        String name = "";
+                        System.out.println("Ingrese nombre del trabajador");
+                        name = scan.nextLine();
+                        String nombreF = name;
+                        for (Empleado e : unaEmpresa.getPlanilla()) {
+                            if (e.getNombre().equalsIgnoreCase(nombreF))
+                                CalculadoraImpuestos.calcularPago(e);
+                        }
+
                         break;
                     case '5':
                         //totales
+                        CalculadoraImpuestos.MostrarTotales();
                         break;
                     case '0':
                         continuar = false;
