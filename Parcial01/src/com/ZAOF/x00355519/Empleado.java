@@ -39,6 +39,13 @@ public abstract class Empleado extends Empresa{
     public abstract void addDocumento(Documento d);
 
     public void removeDocumento(String nombre){
+        documentos.removeIf(s ->{
+            if(s.getNombreDoc().equalsIgnoreCase(nombre)){
+                return true;
+            }
+            else
+                return false;
+        });
     }
 
 }
