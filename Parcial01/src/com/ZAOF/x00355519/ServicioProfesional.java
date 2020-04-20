@@ -29,12 +29,12 @@ public class ServicioProfesional extends Empleado{
         }
 
         if(doc != ""){
-            return "Nombre: " + nombre + " Puesto: " + puesto + " Salario: " + salario +
-                    "Meses de Contrato: " + mesesContrato + " Documentos: " + doc;
+            return "Nombre: " + nombre + "\nPuesto: " + puesto + "\nSalario: $" + salario +
+                    "\nMeses de Contrato: " + mesesContrato + "\nDocumentos: " + doc;
         }
         else{
-            return "Nombre: " + nombre + " Puesto: " + puesto + " Salario: " + salario +
-                    "Meses de Contrato: " + mesesContrato + " Documentos: No hay documentos";
+            return "Nombre: " + nombre + "\nPuesto: " + puesto + "\nSalario: $" + salario +
+                    "\nMeses de Contrato: " + mesesContrato + "\nDocumentos: No hay documentos";
         }
     }
 }

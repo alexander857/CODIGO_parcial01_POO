@@ -34,4 +34,14 @@ public class Empresa {
                 return false;
         });
     }
+
+    public String ToString(){
+        String mess = "";
+
+        for(Empleado e : planilla){
+            mess += e.ToString();
+        }
+
+        return mess;
+    }
 }

@@ -29,12 +29,12 @@ public class PlazaFija extends Empleado{
         }
 
         if(doc != ""){
-            return "Nombre: " + nombre + " Puesto: " + puesto + " Salario: " + salario +
-                    "Extencion: " + extension + " Documentos: " + doc;
+            return "Nombre: " + nombre + "\nPuesto: " + puesto + "\nSalario: $" + salario +
+                    "\nExtencion: " + extension + "\nDocumentos: " + doc;
         }
         else{
-            return "Nombre: " + nombre + " Puesto: " + puesto + " Salario: " + salario +
-                    "Extencion: " + extension + " Documentos: No hay documentos";
+            return "Nombre: " + nombre + "\nPuesto: " + puesto + "\nSalario: $" + salario +
+                    "\nExtencion: " + extension + "\nDocumentos: No hay documentos";
         }
     }
 }
