@@ -17,6 +17,6 @@ public class Documento {
     }
 
     public String toString(){
-        return "Documento: " + nombreDoc + " Numero: " + numero;
+        return "\n\tNombre: " + nombreDoc + "\n\tNumero: " + numero;
     }
 }

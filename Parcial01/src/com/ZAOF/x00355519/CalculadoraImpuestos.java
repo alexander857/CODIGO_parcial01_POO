@@ -29,6 +29,7 @@ public class CalculadoraImpuestos {
             //Renta
             if (SalaryWithoutTaxes > 0.01 && SalaryWithoutTaxes <= 472.00) {
                 Renta = 0;
+                System.out.println();
                 System.out.println("No debe pagar renta\n");
                 System.out.println("Salario a pagar al empleado: $" + (SalaryWithoutTaxes - Renta) +
                         " dolares");
@@ -37,6 +38,7 @@ public class CalculadoraImpuestos {
 
             if (SalaryWithoutTaxes > 472.00 && SalaryWithoutTaxes <= 895.24) {
                 Renta = ((0.1 * (SalaryWithoutTaxes - 472)) + 17.67);
+                System.out.println();
                 System.out.println("Debe pagar: $" + Renta + " dolares\n");
                 System.out.println("Salario a pagar al empleado: $" + (SalaryWithoutTaxes - Renta) +
                         " dolares");
@@ -45,6 +47,7 @@ public class CalculadoraImpuestos {
 
             if (SalaryWithoutTaxes > 895.24 && SalaryWithoutTaxes <= 2038.10) {
                 Renta = ((0.2 * (SalaryWithoutTaxes - 895.25)) + 60);
+                System.out.println();
                 System.out.println("Debe pagar: $" + Renta + " dolares\n");
                 System.out.println("Salario a pagar al empleado: $" + (SalaryWithoutTaxes - Renta) +
                         " dolares");
@@ -53,6 +56,7 @@ public class CalculadoraImpuestos {
 
             if (SalaryWithoutTaxes > 2038.10) {
                 Renta = ((0.3 * (SalaryWithoutTaxes - 2038.10)) + 288.57);
+                System.out.println();
                 System.out.println("Debe pagar: $" + Renta + " dolares\n");
                 System.out.println("Salario a pagar al empleado: $" + (SalaryWithoutTaxes - Renta) +
                         " dolares");
@@ -65,6 +69,7 @@ public class CalculadoraImpuestos {
             System.out.println("Se le descontara el 10% de su salario como valor de renta\n");
                 Renta = (0.1 * BaseSalary);
                 LiquidSalary = BaseSalary - Renta;
+                System.out.println();
                 System.out.println("Su salario es: $" + LiquidSalary + " dolares");
             TotalRenta += Renta;
         }
@@ -72,9 +77,9 @@ public class CalculadoraImpuestos {
         return LiquidSalary;
     }
 
-    public static void MostrarTotales(){
-        System.out.println("Total de impuesto sobre AFP:\n$" + TotalAFP + " dolares\n"
-                            + "Total de impuesto sobre Isss:\n$" + TotalIsss + " dolares\n"
-                                + "Total de impuesto sobre Renta:\n$" + TotalRenta + " dolares\n");
+    public static String MostrarTotales(){
+        return "Total de impuesto sobre AFP: $" + TotalAFP + "\n"
+                            + "Total de impuesto sobre Isss: $" + TotalIsss + "\n"
+                                + "Total de impuesto sobre Renta: $" + TotalRenta + "\n";
     }
 }

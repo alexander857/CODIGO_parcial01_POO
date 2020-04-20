@@ -22,7 +22,7 @@ public class Main {
                     opcion = scan.nextLine().charAt(0);
                     //Verificacion de datos de entrada
                     if (opcion < 0 && opcion >= '6' && opcion != ' ')
-                        throw new WrongDataException("Ingreso de datos erroneo");
+                        throw new WrongDataException("Ingreso de datos erroneo!");
 
                     switch (opcion) {
                         case '1':
@@ -43,13 +43,13 @@ public class Main {
 
                                     //Verificacion de nombre
                                     if (nombre.equals(""))
-                                        throw new InvalidNameException("No puede quedar vacio el nombre");
+                                        throw new InvalidNameException("No puede quedar vacio el nombre!");
 
                                     String nombreF = nombre;
                                     for (Empleado e : unaEmpresa.getPlanilla()) {
                                         //Verificacion sobre nombres repetidos
                                         if (e.getNombre().equals(nombreF))
-                                            throw new InvalidNameException("Nombre ya registrado");
+                                            throw new InvalidNameException("Nombre ya registrado!");
                                     }
 
 
@@ -57,7 +57,8 @@ public class Main {
                                     puesto = scan.nextLine();
 
                                     //Verificacion de tipo de empleo
-                                    if (!puesto.equalsIgnoreCase("Servicio Profesional") && !puesto.equalsIgnoreCase("Plaza Fija"))
+                                    if (!puesto.equalsIgnoreCase("Servicio Profesional") &&
+                                            !puesto.equalsIgnoreCase("Plaza Fija"))
                                         throw new NotFoundJobException("No esta ese tipo de puesto en la Empresa!");
 
                                     System.out.print("Salario: $");
@@ -74,8 +75,8 @@ public class Main {
                                         extension = scan.nextInt();
                                         scan.nextLine();
 
-                                        unEmpleadoPlaza = new PlazaFija("CodigoSV", nombre, puesto, salario, extension);
-                                        unaEmpresa.addEmpleado(unEmpleadoPlaza);
+                                        unEmpleadoPlaza = new PlazaFija("CodigoSV", nombre, puesto,
+                                                salario, extension);
                                         //ciclo para ingresar los documentos que tenga el empleado
                                         boolean seguir = true;
                                         char opcion1 = 0;
@@ -87,9 +88,11 @@ public class Main {
                                                 case 's':
                                                     //Agrega documento
                                                     unEmpleadoPlaza.addDocumento(pedirDatosDocumento());
+                                                    unaEmpresa.addEmpleado(unEmpleadoPlaza);
                                                     break;
                                                 case 'n':
                                                     //Continuar proceso
+                                                    unaEmpresa.addEmpleado(unEmpleadoPlaza);
                                                     seguir = false;
                                                     break;
                                                 default:
@@ -107,11 +110,11 @@ public class Main {
 
                                         //Verificaion plazo minimo de contrato
                                         if (mesesContrato < 1)
-                                            throw new InvalidContractException("Debe ser un contrado de un mes en adelante!");
+                                            throw new InvalidContractException("Debe ser un contrado " +
+                                                    "de un mes en adelante!");
 
                                         unEmpleadoProfesional = new ServicioProfesional("CodigoSV", nombre,
                                                 puesto, salario, mesesContrato);
-                                        unaEmpresa.addEmpleado(unEmpleadoProfesional);
                                         boolean seguir = true;
                                         char opcion2 = 0;
                                         do {
@@ -122,9 +125,11 @@ public class Main {
                                                 case 's':
                                                     //Agregar empleado
                                                     unEmpleadoProfesional.addDocumento(pedirDatosDocumento());
+                                                    unaEmpresa.addEmpleado(unEmpleadoProfesional);
                                                     break;
                                                 case 'n':
                                                     //Continuar proceso
+                                                    unaEmpresa.addEmpleado(unEmpleadoProfesional);
                                                     seguir = false;
                                                     break;
                                                 default:
@@ -155,45 +160,71 @@ public class Main {
                             break;
                         case '2':
                             //remove empleado
-                            String name = "";
-                            System.out.println("Ingrese nombre del trabajador");
-                            name = scan.nextLine();
-                            String nombreF = name;
-                            //Verificacion de existencia de empleado
-                            if (nombreF != unaEmpresa.getNombreEmpresa()) {
-                                throw new NotExistingEmployeeException("Empleado no existe en la empresa");
+                            try {
+                                System.out.println();
+                                System.out.print("Ingrese el nombre del empleado: ");
+                                String empleado = scan.nextLine();
+                                String empleadoF = empleado;
+                                Empleado aDespedir = null;
+
+                                for(Empleado e: unaEmpresa.getPlanilla()){
+                                    if(e.getNombre().equals(empleado)){
+                                        aDespedir = e;
+                                    }
+                                }
+
+                                if(aDespedir == null)
+                                    throw new NotExistingEmployeeException("No esta registrado ese nombre!");
+
+                                unaEmpresa.getPlanilla().removeIf(s->s.getNombre().equals(empleadoF));
+                                System.out.println("Empleado despedido!");
+                            }
+                            catch (NotExistingEmployeeException e){
+                                System.out.println();
+                                System.out.println(e.getMessage());
                             }
 
-                            unaEmpresa.getPlanilla().forEach(s -> {
-                                unaEmpresa.quitEmpleado(nombreF);
-                            });
                             break;
                         case '3':
                             //lista
-                            System.out.println();
                             //Mostrar lista de empleados
                             unaEmpresa.getPlanilla().forEach(s -> {
+                                System.out.println();
                                 System.out.println(s.ToString());
                             });
                             break;
                         case '4':
                             //sueldo
-                            name = "";
-                            System.out.println("Ingrese nombre del trabajador");
+                            String name = "";
+                            boolean encontrado = false;
+                            System.out.println();
+                            System.out.print("Ingrese nombre del trabajador: ");
                             name = scan.nextLine();
-                            nombreF = name;
+                            String nombreF = name;
                             //Buscar empleado en planilla
                             for (Empleado e : unaEmpresa.getPlanilla()) {
-                                if (e.getNombre().equalsIgnoreCase(nombreF))
+                                if (e.getNombre().equals(nombreF)){
                                     CalculadoraImpuestos.calcularPago(e);
+                                    encontrado = true;
+                                }
+
                             }
+                            if(!encontrado){
+                                System.out.println();
+                                System.out.println("No encontrado o lista vacia!");
+                            }
+
                             break;
                         case '5':
                             //Mostrar totales de impuestos
-                            CalculadoraImpuestos.MostrarTotales();
+                            System.out.println();
+                            System.out.println(CalculadoraImpuestos.MostrarTotales());
                             break;
-                        case '0':
+                        case '6':
                             continuar = false;
+                            break;
+                        default:
+                            System.out.println("\nOpcion no valida!");
                             break;
                     }
                 }
@@ -215,18 +246,31 @@ public class Main {
     public static void menuPrincipal(){
         //Mostrar menu principal
         System.out.println("\n1-Agregar Empleado\n2-Despedir Empleado\n3-Ver lista de Empleados\n" +
-                "4-Calcular Sueldo\n5-Mostrar Totales\n0-Salir");
+                "4-Calcular Sueldo\n5-Mostrar Totales\n6-Salir");
     }
 
     public static Documento pedirDatosDocumento() {
         String nombreDoc = "", numero = "";
         boolean seguir = true;
 
-        System.out.println("Documentos");
-        System.out.print("\tNombre: ");
-        nombreDoc = scan.nextLine();
-        System.out.print("\tNumero: ");
-        numero = scan.nextLine();
+        do{
+            try {
+                System.out.println("Documentos");
+                System.out.print("\tNombre: ");
+                nombreDoc = scan.nextLine();
+                if(nombreDoc.equals(""))
+                    throw new InvalidNameException("Tiene que llenar todos los campos!!");
+                System.out.print("\tNumero: ");
+                numero = scan.nextLine();
+                if(numero.equals(""))
+                    throw new InvalidNameException("Tiene que llenar todos los campos!!");
+                seguir = false;
+            }
+            catch (InvalidNameException e){
+                System.out.println(e.getMessage());
+            }
+        }while(seguir);
+
 
         //Retornando valores del documento
         return new Documento(nombreDoc,numero);
